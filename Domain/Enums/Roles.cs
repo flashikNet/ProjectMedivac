@@ -2,9 +2,9 @@
 {
     public enum Roles
     {
-        Admin,
-        Captain,
+        User,
         Player,
-        User
+        Captain,
+        Admin
     }
 }

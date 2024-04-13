@@ -530,9 +530,6 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-#AuthOptions
-AuthOptions.cs
-
 # JetBrains Rider
 
 ### VisualStudio Patch ###

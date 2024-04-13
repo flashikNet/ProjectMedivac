@@ -1,4 +1,4 @@
-using Domain;
+using Application;
 using Domain.Auth;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,11 +18,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateLifetime = true,
         IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
         ValidateIssuerSigningKey = true,
-        ClockSkew = TimeSpan.Zero
+        ClockSkew = TimeSpan.FromSeconds(5)
     };
 });
 
-builder.Services.TryAddDomain();
+builder.Services.TryAddApplication();
 builder.Services.TryAddInfrastructure();
 
 builder.Services.AddControllers();
@@ -34,7 +34,6 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

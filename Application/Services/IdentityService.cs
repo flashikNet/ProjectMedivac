@@ -1,16 +1,15 @@
-﻿using Domain.Auth;
+﻿using Application.Interfaces;
+using Application.Models.Requests;
+using Application.Models.Responses;
+using Domain.Auth;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Domain.Services
+namespace Application.Services
 {
     internal class IdentityService : IIdentityService
     {
@@ -22,29 +21,20 @@ namespace Domain.Services
         public void Delete(uint id)
         {
             uow.Users.Delete(id);
+            uow.Commit();
         }
 
-        public string SignIn(string email, string password)
+        public SignResp SignIn(SignInReq signInReq)
         {
+            var email = signInReq.Email;
+            var password = signInReq.Password;
             var user = uow.Users.GetAll().Where(u => u.Email == email && u.Password == password).FirstOrDefault();
             if(user is null)
             {
                 return null;
             }
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Role, user.Role.ToString())
-            };
-            // создаем JWT-токен
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    claims: claims,
-                    expires: DateTime.Now.Add(TimeSpan.FromSeconds(20)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-
-            return new JwtSecurityTokenHandler().WriteToken(jwt);
+            var jwt = GetToken(user);
+            return new() { Id = user.Id, Token = jwt};
         }
 
         public void SignOut()
@@ -52,13 +42,30 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
-        public string SignUp(User user)
+        public SignResp SignUp(SignUpReq userDTO)
         {
+            var user = new User()
+            {
+                Name = userDTO.Name,
+                Email = userDTO.Email,
+                Password = userDTO.Password,
+                Role = Roles.User,
+                MMR = userDTO.MMR,
+                Race = userDTO.Race,
+                BattleNetAccount = userDTO.BattleNetAccount
+            };
             uow.Users.Create(user);
             uow.Commit();
+            var jwt = GetToken(user);
+            return new() { Id = user.Id, Token = jwt };
+        }
+
+        private string GetToken(User user)
+        {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
             // создаем JWT-токен
@@ -66,7 +73,7 @@ namespace Domain.Services
                     issuer: AuthOptions.ISSUER,
                     audience: AuthOptions.AUDIENCE,
                     claims: claims,
-                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+                    expires: DateTime.Now.Add(TimeSpan.FromMinutes(10)),
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
             return new JwtSecurityTokenHandler().WriteToken(jwt);

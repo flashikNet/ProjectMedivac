@@ -1,10 +1,9 @@
-﻿using Domain.Entities;
-using Domain.Interfaces;
+﻿using Application.Interfaces;
+using Application.Models.Requests;
+using Application.Models.Responses;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using WebApi.RequestModels;
+using System.Security.Claims;
 
 namespace WebApi.Controllers
 {
@@ -20,32 +19,33 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("signIn")]
-        [ProducesResponseType<string>(200)]
-        public async Task<IActionResult> SignIn([FromQuery]SignInRequest loginData)
+        [ProducesResponseType<SignResp>(200)]
+        public IActionResult SignIn([FromQuery]SignInReq loginData)
         {
-            return Ok(_service.SignIn(loginData.Email, loginData.Password));
+            var response = _service.SignIn(loginData);
+            if(response is null)
+            {
+                return Unauthorized();
+            }
+            return Ok(response);
         }
 
         [HttpPost]
         [Route("signUp")]
-        [ProducesResponseType<string>(200)]
-        public async Task<IActionResult> SignUp(User user)
+        [ProducesResponseType<SignResp>(200)]
+        public async Task<IActionResult> SignUp(SignUpReq userDTO)
         {
-            return Ok(_service.SignUp(user));
+            return Ok(_service.SignUp(userDTO));
         }
 
         [HttpGet]
+        [Route("delete")]
         [Authorize]
-        public async Task<IActionResult> GetData()
+        public async Task<IActionResult> Delete()
         {
-            return Ok(DateTime.Now);
+            var id = uint.Parse( User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            _service.Delete(id);
+            return Ok();
         }
-        //[HttpGet]
-        //[Route("signOut")]
-        //[ProducesResponseType(200)]
-        //public Task<IActionResult> SignOut()
-        //{
-
-        //}
     }
 }
