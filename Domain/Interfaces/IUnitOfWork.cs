@@ -11,6 +11,7 @@ namespace Domain.Interfaces
     {
         public IRepository<Team> Teams {get; set;}
         public IRepository<User> Users { get; set; }
+        public IRepository<Invite> Invites { get; set; }
 
         public void Commit();
     }

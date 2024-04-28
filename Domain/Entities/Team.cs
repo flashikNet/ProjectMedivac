@@ -1,8 +1,9 @@
-﻿namespace Domain.Entities
+﻿using Domain.Interfaces;
+
+namespace Domain.Entities
 {
-    public class Team
+    public class Team : EntityBase
     {
-        public uint Id { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; } = "";
         public List<User> Users { get; set; } = new();

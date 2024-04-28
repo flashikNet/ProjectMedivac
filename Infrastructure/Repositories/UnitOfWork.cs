@@ -8,11 +8,14 @@ namespace Infrastructure.Repositories
     {
         public IRepository<Team> Teams { get; set; }
         public IRepository<User> Users { get; set; }
+        public IRepository<Invite> Invites { get; set; }
+
         private IdentityContext _db;
         public UnitOfWork(IdentityContext identityContext) {
             _db = identityContext;
             Users = new UserRepository(_db);
             Teams = new TeamRepository(_db);
+            Invites = new InviteRepository(_db);
         }
 
         public void Commit()
