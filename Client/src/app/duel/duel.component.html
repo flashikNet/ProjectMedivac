@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-5">
+        <div class="card-header">
+          <h2 class="text-center"><img class="icon"
+                                       [src]="'https://flagicons.lipis.dev/flags/4x3/'+duel.teams[0].region.toLowerCase()+'.svg'"
+                                       alt="{{duel.teams[0].region}}">
+            {{ duel.teams[0].name }} vs {{ duel.teams[1].name }}
+            <img class="icon"
+                 [src]="'https://flagicons.lipis.dev/flags/4x3/'+duel.teams[1].region.toLowerCase()+'.svg'"
+                 alt="{{duel.teams[1].region}}"></h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="list-group">
+                <li class="versus list-group-item" *ngFor="let player of duel.teams[0].players; let i = index">
+                  <img class="icon"
+                       [src]="'https://sc2pulse.nephest.com/sc2/static/icon/race/' + player.race.toLowerCase() + '.svg'"
+                       alt="{{player.race}}">
+                  <img class="icon"
+                       [src]="'https://flagicons.lipis.dev/flags/4x3/'+player.country.toLowerCase()+'.svg'"
+                       alt="{{player.country}}">
+                  {{ player.nickname }}
+                  <strong>vs</strong>
+                  {{ duel.teams[1].players[i].nickname }}
+                  <img class="icon"
+                       [src]="'https://sc2pulse.nephest.com/sc2/static/icon/race/' + duel.teams[1].players[i].race.toLowerCase() + '.svg'"
+                       alt="{{duel.teams[1].players[i].race}}">
+                  <img class="icon"
+                       [src]="'https://flagicons.lipis.dev/flags/4x3/'+duel.teams[1].players[i].country.toLowerCase()+'.svg'"
+                       alt="{{duel.teams[1].players[i].country}}">
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+﻿{
+  "players": [
+    {
+      "id": 1,
+      "race": "zerg",
+      "country": "fi",
+      "nickname": "Serral",
+      "team": "Save Europe"
+    },
+    {
+      "id": 2,
+      "race": "terran",
+      "country": "ru",
+      "nickname": "Marcelo",
+      "team": "Save Europe"
+    },
+    {
+      "id": 3,
+      "race": "protoss",
+      "country": "kr",
+      "nickname": "Stats",
+      "team": "South Korea"
+    },
+    {
+      "id": 4,
+      "race": "terran",
+      "country": "kr",
+      "nickname": "Maru",
+      "team": "South Korea"
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "region": "eu",
+      "name": "Save Europe",
+      "players": [
+        {
+          "id": 1,
+          "race": "zerg",
+          "country": "fi",
+          "nickname": "Serral"
+        },
+        {
+          "id": 2,
+          "race": "terran",
+          "country": "ru",
+          "nickname": "Marcelo"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "region": "kr",
+      "name": "South Korea",
+      "players": [
+        {
+          "id": 3,
+          "race": "protoss",
+          "country": "kr",
+          "nickname": "Stats"
+        },
+        {
+          "id": 4,
+          "race": "terran",
+          "country": "kr",
+          "nickname": "Maru"
+        }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "id": 1,
+      "teams": [
+        {
+          "id": 1,
+          "region": "eu",
+          "name": "Save Europe",
+          "players": [
+            {
+              "id": 1,
+              "race": "zerg",
+              "country": "fi",
+              "nickname": "Serral"
+            },
+            {
+              "id": 2,
+              "race": "terran",
+              "country": "ru",
+              "nickname": "Marcelo"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "region": "kr",
+          "name": "South Korea",
+          "players": [
+            {
+              "id": 3,
+              "race": "protoss",
+              "country": "kr",
+              "nickname": "Stats"
+            },
+            {
+              "id": 4,
+              "race": "terran",
+              "country": "kr",
+              "nickname": "Maru"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "teams": [
+        {
+          "id": 1,
+          "region": "eu",
+          "name": "Save Europe",
+          "players": [
+            {
+              "id": 1,
+              "race": "zerg",
+              "country": "fi",
+              "nickname": "Serral"
+            },
+            {
+              "id": 2,
+              "race": "terran",
+              "country": "ru",
+              "nickname": "Marcelo"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "region": "kr",
+          "name": "South Korea",
+          "players": [
+            {
+              "id": 3,
+              "race": "protoss",
+              "country": "kr",
+              "nickname": "Stats"
+            },
+            {
+              "id": 4,
+              "race": "terran",
+              "country": "kr",
+              "nickname": "Maru"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

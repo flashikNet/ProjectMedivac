@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div *ngFor="let team of teams" class="card mb-3 mt-3">
+        <div class="card-header">
+          <h4 class="team-name" [routerLink]="'/teams/' + team.id">{{ team.name }} <img class="icon" [src]="'https://flagicons.lipis.dev/flags/4x3/'+team.region.toLowerCase()+'.svg'" alt="{{team.region}}"></h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <img class="team-logo" [routerLink]="'/teams/' + team.id" [src]="'https://cdn2.steamgriddb.com/logo_thumb/4ccea3161064506dda8e0c9fd416d1ae.png'" alt="{{team.region}}">
+            </div>
+            <div class="col-9">
+              <h5>Игроки:</h5>
+              <ul class="list-group">
+                <li *ngFor="let player of team.players" class="list-group-item">
+                  <div class="row align-items-center">
+                    <div class="col-1">
+                      <img class="icon" [src]="'https://sc2pulse.nephest.com/sc2/static/icon/race/' + player.race.toLowerCase() + '.svg'" alt="{{player.race}}">
+                    </div>
+                    <div class="col-1">
+                      <img class="icon" [src]="'https://flagicons.lipis.dev/flags/4x3/'+player.country.toLowerCase()+'.svg'" alt="{{player.country}}">
+                    </div>
+                    <div class="col-3">
+                      <span class="player-name fw-semibold" routerLink="/players/{{player.id}}">{{ player.nickname }}</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

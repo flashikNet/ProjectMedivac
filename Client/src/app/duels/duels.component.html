@@ -1,0 +1,21 @@
+<div class="container justify-content-center align-items-center">
+  <div class="row justify-content-center">
+    <div class="col-md-8" *ngFor="let duel of duels">
+      <div class="duel card mt-3">
+        <div class="duel-card card-body">
+          <p class="card-text" routerLink="/duels/{{duel.id}}">
+            <img class="team-logo"
+                 [src]="'https://cdn2.steamgriddb.com/logo_thumb/4ccea3161064506dda8e0c9fd416d1ae.png'"
+                 alt="logo">
+            {{ duel.teams[0].name }}
+            <strong>vs</strong>
+            {{ duel.teams[1].name }}
+            <img class="team-logo"
+                 [src]="'https://cdn2.steamgriddb.com/logo_thumb/4ccea3161064506dda8e0c9fd416d1ae.png'"
+                 alt="logo">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

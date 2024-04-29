@@ -1,0 +1,27 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>
+            <img class="icon"
+                 [src]="'https://sc2pulse.nephest.com/sc2/static/icon/race/' + player.race.toLowerCase() + '.svg'"
+                 alt="{{player.race}}">
+            <img class="icon"
+                 [src]="'https://flagicons.lipis.dev/flags/4x3/'+player.country.toLowerCase()+'.svg'"
+                 alt="{{player.country}}">
+            {{ player.nickname }} -
+            <img class="team-logo"
+                 [src]="'https://cdn2.steamgriddb.com/logo_thumb/4ccea3161064506dda8e0c9fd416d1ae.png'"
+                 alt="{{player.team}}"> {{ player.team }}</h4>
+        </div>
+        <div class="card-body">
+          <img class="league-image"
+               [src]="'https://psv4.userapi.com/c237231/u367451125/docs/d17/60612cbd8966/gm.png?extra=RF7ymRbP5GNZqRyr1BjSJpYiJSlQDqW6dOKxdd1Th35xw-lR9H-ulZExOuEa_vMzTegYt6XX7xb6he9AZefJ31ql_8VghSTDtXKEysemXUZ3eeHFv51LzUl_7D_bBBTOr-VM8IlIDuAdaOIUMV4U1A'"
+               alt="GM">
+          <p>5510 MMR</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
