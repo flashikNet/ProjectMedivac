@@ -10,6 +10,8 @@ namespace Application
         public static IServiceCollection TryAddApplication(this IServiceCollection services)
         {
             services.TryAddScoped<IIdentityService, IdentityService>();
+            services.TryAddScoped<IInviteService, InviteService>();
+            services.TryAddScoped<ITeamService, TeamService>();
             return services;
         }
     }
