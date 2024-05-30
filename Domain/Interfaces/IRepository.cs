@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace Domain.Interfaces
 {
     public interface IRepository<T>// : IDisposable
-        where T : class
+        where T : EntityBase
     {
         IEnumerable<T> GetAll(); // получение всех объектов
         Task<T> GetAsync(uint id); // получение одного объекта по id

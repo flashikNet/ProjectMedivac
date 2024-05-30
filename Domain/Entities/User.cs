@@ -2,9 +2,8 @@
 
 namespace Domain.Entities
 {
-    public class User
+    public class User : EntityBase
     {
-        public uint Id { get; set; }
         public required string Name { get; set; }
         public required string Email { get; set; }
         public required string BattleNetAccount { get; set; }

@@ -66,7 +66,8 @@ namespace Application.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role.ToString())
+                new Claim(ClaimTypes.Role, user.Role.ToString()),
+                new Claim("TeamId", user.Team?.Id.ToString() ?? "0")
             };
             // создаем JWT-токен
             var jwt = new JwtSecurityToken(

@@ -12,6 +12,8 @@ namespace Infrastructure.Data
     {
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Team> Teams { get; set; } = null!;
+
+        public DbSet<Invite> Invites { get; set; } = null!;
         public IdentityContext() {
             //Database.EnsureDeleted();
             Database.EnsureCreated();
