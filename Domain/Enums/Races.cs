@@ -3,7 +3,8 @@
     public enum Races
     {
         Terran,
+        Zerg,
         Protoss,
-        Zerg
+        Random
     }
 }

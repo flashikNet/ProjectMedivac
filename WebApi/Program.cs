@@ -1,12 +1,17 @@
 using Application;
 using Domain.Auth;
 using Infrastructure;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthorization();
+// Configure services
+builder.Services.AddControllers();
+
+// Add authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters()
@@ -22,18 +27,51 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+// Add authorization
+builder.Services.AddAuthorization();
+
+// Add custom application and infrastructure services
 builder.Services.TryAddApplication();
 builder.Services.TryAddInfrastructure();
 
-builder.Services.AddControllers();
+// Add MongoDB dependencies
+builder.Services.AddMongoDbDependencies(MongoDbConstants.MongoDbConnectionString, MongoDbConstants.MongoDbDatabaseName);
 
+// Add Swagger for API documentation
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Enter your JWT token in the format 'Bearer {your token}'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+            },
+            new string[] {}
+        }
+    });
+});
+
+// Register serializers (if any)
+SerializerConfig.RegisterSerializers();
 
 var app = builder.Build();
-app.UseAuthentication();
-app.UseAuthorization();
 
+// Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -42,6 +80,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

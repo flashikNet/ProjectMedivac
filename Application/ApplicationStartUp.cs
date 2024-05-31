@@ -1,5 +1,4 @@
-﻿using Application.Interfaces;
-using Application.Services;
+﻿using Domain.Auth;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -9,7 +8,7 @@ namespace Application
     {
         public static IServiceCollection TryAddApplication(this IServiceCollection services)
         {
-            services.TryAddScoped<IIdentityService, IdentityService>();
+            services.AddSingleton(new TokenService());
             return services;
         }
     }

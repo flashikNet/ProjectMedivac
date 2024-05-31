@@ -1,10 +1,14 @@
-﻿namespace Domain.Entities
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace Domain.Entities;
+
+public class Team
 {
-    public class Team
-    {
-        public uint Id { get; set; }
-        public required string Name { get; set; }
-        public required string Description { get; set; } = "";
-        public List<User> Users { get; set; } = new();
-    }
+    public Guid Id { get; set; }
+    
+    [BsonElement("TeamName")]
+    public string TeamName { get; set; }
+    
+    [BsonElement("Members")]
+    public List<User>? Members { get; set; }
 }
