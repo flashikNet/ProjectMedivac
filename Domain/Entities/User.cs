@@ -1,18 +1,27 @@
 ﻿using Domain.Enums;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Domain.Entities
+namespace Domain.Entities;
+
+public class User
 {
-    public class User : EntityBase
-    {
-        public required string Name { get; set; }
-        public required string Email { get; set; }
-        public required string BattleNetAccount { get; set; }
-        public required string Password { get; set; }
-        public string Status { get; set; } = "";
-        public required Roles Role { get; set; }
-        public required Races Race { get; set; }
-        public required uint MMR {  get; set; }
-        public Team? Team { get; set; }
-
-    }
+    public Guid Id { get; set; }
+    
+    [BsonElement("Username")]
+    public string Username { get; set; }
+    
+    [BsonElement("SignInInfo")]
+    public SignInInfo SignInInfo { get; set; }
+    
+    [BsonElement("Nickname")]
+    public string Nickname { get; set; }
+    
+    [BsonElement("Race")]
+    public Races Race { get; set; }
+    
+    [BsonElement("Team")]
+    public Team? Team { get; set; }
+    
+    [BsonElement("Invites")]
+    public List<TeamInvite>? Invites { get; set; }
 }
