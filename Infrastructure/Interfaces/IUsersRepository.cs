@@ -14,4 +14,6 @@ public interface IUsersRepository
     Task<bool> UpdateUserTeam(Guid userId, Team team);
     Task<bool> AddTeamInviteAsync(Guid userId, TeamInvite invite);
     Task<bool> AcceptTeamInviteAsync(Guid userId, Guid inviteId);
+    Task<bool> AcceptDuelInviteAsync(Guid userId, Guid inviteId);
+    Task<bool> AddDuelInviteAsync(Guid userId, DuelInvite invite);
 }

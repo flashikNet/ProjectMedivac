@@ -27,4 +27,10 @@ public class User
 
     [BsonElement("Invites")] 
     public List<TeamInvite>? Invites { get; set; } = new List<TeamInvite>();
+
+    [BsonElement("DuelInvites")]
+    public List<DuelInvite>? DuelInvites { get; set; } = new List<DuelInvite>();
+    
+    [BsonElement("CurrentDuel")]
+    public Duel? CurrentDuel { get; set; }
 }

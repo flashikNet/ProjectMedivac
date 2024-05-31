@@ -2,7 +2,6 @@
 using Domain.Enums;
 using Infrastructure.Interfaces;
 using MongoDB.Driver;
-using ZstdSharp.Unsafe;
 
 namespace Infrastructure.Repositories;
 
@@ -99,6 +98,38 @@ public class UsersRepository : IUsersRepository
             .PullFilter(u => u.Invites, i => i.Id == inviteId)
             .Set(u => u.Team, new Team { Id = teamId })
             .Set(u => u.Role, Roles.Player);
+
+        var result = await _mongoCollection.UpdateOneAsync(u => u.Id == userId, update);
+        return result.ModifiedCount > 0;
+    }
+    
+    public async Task<bool> AddDuelInviteAsync(Guid userId, DuelInvite invite)
+    {
+        var update = Builders<User>.Update.AddToSet(u => u.DuelInvites, invite);
+        var result = await _mongoCollection.UpdateOneAsync(u => u.Id == userId, update);
+        return result.ModifiedCount > 0;
+    }
+
+    public async Task<bool> AcceptDuelInviteAsync(Guid userId, Guid inviteId)
+    {
+        var user = await _mongoCollection.Find(u => u.Id == userId).FirstOrDefaultAsync();
+
+        if (user?.DuelInvites == null)
+        {
+            return false;
+        }
+
+        var invite = user.DuelInvites.FirstOrDefault(i => i.Id == inviteId);
+        if (invite == null)
+        {
+            return false;
+        }
+
+        var duelId = invite.Id;
+
+        var update = Builders<User>.Update
+            .PullFilter(u => u.DuelInvites, i => i.Id == inviteId)
+            .Set(u => u.CurrentDuel, new Duel { Id = duelId });
 
         var result = await _mongoCollection.UpdateOneAsync(u => u.Id == userId, update);
         return result.ModifiedCount > 0;

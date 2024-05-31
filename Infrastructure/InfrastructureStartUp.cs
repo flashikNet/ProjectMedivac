@@ -12,6 +12,7 @@ namespace Infrastructure
         {
             services.TryAddScoped<ITeamsRepository, TeamsRepository>();
             services.TryAddScoped<IUsersRepository, UsersRepository>();
+            services.TryAddScoped<IDuelsRepository, DuelsRepository>();
             return services;
         }
     }

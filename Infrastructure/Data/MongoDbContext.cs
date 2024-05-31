@@ -25,6 +25,12 @@ public static class MongoDbContext
         {
             var database = provider.GetRequiredService<IMongoDatabase>();
             return database.GetCollection<User>("Users");
+        });     
+        
+        services.AddScoped<IMongoCollection<Duel>>(provider =>
+        {
+            var database = provider.GetRequiredService<IMongoDatabase>();
+            return database.GetCollection<Duel>("Duels");
         });        
     }
 }
