@@ -23,4 +23,17 @@ public class TeamsRepository : ITeamsRepository
         await _mongoCollection.InsertOneAsync(team);
         return team;
     }
+
+    public async Task<Team> GetTeamById(Guid id)
+    {
+        return await _mongoCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    }
+    
+    public async Task<bool> UpdateTeamMembers(Guid teamId, List<User> members)
+    {
+        var update = Builders<Team>.Update.Set(t => t.Members, members);
+        var result = await _mongoCollection.UpdateOneAsync(t => t.Id == teamId, update);
+        return result.ModifiedCount > 0;
+    }
+
 }

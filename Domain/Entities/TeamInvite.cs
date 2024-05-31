@@ -6,14 +6,14 @@ public class TeamInvite
 {
     public Guid Id { get; set; }
     
-    [BsonElement("InviteFrom")]
-    public Team TeamInviter { get; set; }
-    
-    [BsonElement("RecipientUser")]
-    public User RecipientUser { get; set; }
-    
-    [BsonElement("Pending")]
-    public bool Pending { get; set; }
+    [BsonElement("TeamId")]
+    public Guid TeamId { get; set; }
+
+    [BsonElement("InvitedBy")]
+    public Guid InvitedBy { get; set; }
+
+    [BsonElement("InviteDate")]
+    public DateTime InviteDate { get; set; }
     
     [BsonElement("Accepted")]
     public bool Accepted { get; set; }

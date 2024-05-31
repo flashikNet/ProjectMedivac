@@ -22,6 +22,9 @@ public class User
     [BsonElement("Team")]
     public Team? Team { get; set; }
     
-    [BsonElement("Invites")]
-    public List<TeamInvite>? Invites { get; set; }
+    [BsonElement("Role")]
+    public Roles Role { get; set; }
+
+    [BsonElement("Invites")] 
+    public List<TeamInvite>? Invites { get; set; } = new List<TeamInvite>();
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Models.Requests;
 using Application.Models.Responses;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Extensions;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -19,22 +20,30 @@ public class UsersController : BaseApiController
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] User user)
+    public async Task<IActionResult> Register([FromBody] SignupRequest request)
     {
-        if (!user.IsValid())
-        {
-            return BadRequest("no sign in info.");
-        }
-
-        if (await _usersRepository.UserExistsByEmailAsync(user.SignInInfo.Email))
+        if (await _usersRepository.UserExistsByEmailAsync(request.Email))
         {
             return BadRequest("email already exists.");
         }
 
-        if (await _usersRepository.UserExistsByUsernameAsync(user.Username))
+        if (await _usersRepository.UserExistsByUsernameAsync(request.Username))
         {
             return BadRequest("username already exists.");
         }
+
+        var user = new User
+        {
+            Username = request.Username,
+            SignInInfo = new SignInInfo
+            {
+                Email = request.Email,
+                Password = request.Password
+            },
+            Nickname = request.Nickname,
+            Race = request.Race,
+            Role = Roles.User
+        };
         
         await _usersRepository.CreateUserAsync(user);
         return Ok(user);
