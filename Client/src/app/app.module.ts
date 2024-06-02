@@ -9,11 +9,12 @@ import { TeamsComponent } from './teams/teams.component';
 import { DuelsComponent } from './duels/duels.component';
 import { DuelComponent } from './duel/duel.component';
 import { TeamComponent } from './team/team.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import { CreateTeamComponent } from './create-team/create-team.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PlayerComponent } from './player/player.component';
+import {JwtInterceptor} from "./_interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -32,9 +33,12 @@ import { PlayerComponent } from './player/player.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,13 +23,13 @@ public class TeamsController : BaseApiController
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (userId == null)
         {
-            return Unauthorized("User not found");
+            return Unauthorized("Пользователь не найден. Авторизуйтесь для того, что бы создать команду");
         }
     
         var user = await _usersRepository.GetUserByIdAsync(Guid.Parse(userId));
         if (user == null)
         {
-            return Unauthorized("User not found.");
+            return Unauthorized("Пользователь не найден. Авторизуйтесь для того, что бы создать команду.");
         }
         
         var teamModel = await _teamsRepository.CreateTeam(team);

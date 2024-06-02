@@ -7,8 +7,8 @@ export interface User {
   token: string;
   nickname: string;
   team: Team;
-  Race: Races;
-  Role: Roles;
+  Race: string;
+  Role: string;
   TeamInvites: TeamInvite[];
   DuelInvites: DuelInvite[];
 }

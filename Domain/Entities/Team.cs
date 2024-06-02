@@ -8,7 +8,7 @@ public class Team
     
     [BsonElement("TeamName")]
     public string TeamName { get; set; }
-    
-    [BsonElement("Members")]
-    public List<User>? Members { get; set; }
+
+    [BsonElement("Members")] 
+    public List<User>? Members { get; set; } = new List<User>();
 }

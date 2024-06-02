@@ -17,11 +17,15 @@
           <li class="nav-item">
             <a class="nav-link mx-lg-5" routerLink="/create-team">Создать команду</a>
           </li>
-          <li class="nav-item">
+
+          <li class="nav-item" *ngIf="!(currentUser$ | async)">
             <a class="nav-link" routerLink="/auth">Войти</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!(currentUser$ | async)">
             <a class="nav-link" routerLink="/register">Регистрация</a>
+          </li>
+          <li class="nav-item" *ngIf="currentUser$ | async as currentUser$">
+            <button class="nav-link" (click)="logout()">Выйти ({{ currentUser$.username }})</button>
           </li>
         </ul>
       </div>

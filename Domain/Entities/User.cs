@@ -17,7 +17,7 @@ public class User
     public string Nickname { get; set; }
     
     [BsonElement("Race")]
-    public Races Race { get; set; }
+    public string Race { get; set; }
     
     [BsonElement("Team")]
     public Team? Team { get; set; }
