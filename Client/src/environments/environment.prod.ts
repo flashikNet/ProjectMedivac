@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:5173/api/'
+  apiUrl: 'https://project-medivac.somee.com/api/'
 };
 
 /*

@@ -34,7 +34,7 @@ export class CreateTeamComponent {
       this.teamService.createTeam(formData).subscribe(
         response => {
           console.log('Create Team successful', response);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/teams');
         },
         error => {
           console.error('Create Team failed', error);

@@ -13,7 +13,7 @@ import {Roles} from "../_enums/roles";
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = environment.apiUrl;
+  baseUrl = 'https://project-medivac.somee.com/api/';
   private currentUserSource = new ReplaySubject<User | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -69,13 +69,13 @@ export class AccountService {
   }
 
   getCurrentUserRole(): Observable<Roles> {
-    let result = this.http.get<Roles>(environment.apiUrl + 'Users/role');
+    let result = this.http.get<Roles>('https://project-medivac.somee.com/api/' + 'Users/role');
     console.log(result);
     return result;
   }
 
   getCurrentUserTeamId(): Observable<string> {
-    let result = this.http.get<string>(environment.apiUrl + 'Users/userTeamId');
+    let result = this.http.get<string>('https://project-medivac.somee.com/api/' + 'Users/userTeamId');
     console.log(result);
     return result;
   }

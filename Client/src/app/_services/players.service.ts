@@ -10,6 +10,6 @@ export class PlayersService {
   constructor(private http: HttpClient) { }
 
   getPlayerById(id: string): Observable<any> {
-    return this.http.get(environment.apiUrl + 'players/' + id);
+    return this.http.get('https://project-medivac.somee.com/api/' + 'players/' + id);
   }
 }

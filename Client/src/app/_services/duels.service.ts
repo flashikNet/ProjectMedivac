@@ -12,10 +12,10 @@ export class DuelsService {
   }
 
   getDuels(): Observable<any> {
-    return this.http.get(environment.apiUrl + 'matches')
+    return this.http.get('https://project-medivac.somee.com/api/' + 'matches')
   }
 
   getDuelById(id: string): Observable<any> {
-    return this.http.get(environment.apiUrl + 'matches/' + id);
+    return this.http.get('https://project-medivac.somee.com/api/' + 'matches/' + id);
   }
 }

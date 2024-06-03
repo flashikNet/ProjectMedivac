@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccountService} from "../_services/account.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment.prod";
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,7 @@ export class AuthComponent implements OnInit {
   onSubmit(): void {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value;
-      console.log(formData)
+      console.log('https://project-medivac.somee.com/api/')
       this.accountService.login(formData).subscribe(
         response => {
           console.log('Login successful', response);
