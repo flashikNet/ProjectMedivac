@@ -3,12 +3,13 @@ import {DuelInvite} from "./duelInvite";
 import {Team} from "./team";
 
 export interface User {
+  id: string;
   username: string;
   token: string;
   nickname: string;
   team: Team;
-  Race: string;
-  Role: string;
-  TeamInvites: TeamInvite[];
-  DuelInvites: DuelInvite[];
+  race: string;
+  role: string;
+  teamInvites: TeamInvite[];
+  duelInvites: DuelInvite[];
 }

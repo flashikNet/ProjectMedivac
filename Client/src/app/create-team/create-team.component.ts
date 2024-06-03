@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TeamsService} from "../_services/teams.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../_services/account.service";
@@ -11,19 +11,20 @@ import {Router} from "@angular/router";
 })
 export class CreateTeamComponent {
   createTeamForm: FormGroup = this.fb.group({})
-error: string = "";
+  error: string = "";
+
   constructor(
     private fb: FormBuilder,
     private teamService: TeamsService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.createTeamForm = this.fb.group({
       teamName: ['', Validators.required]
     });
   }
-
 
 
   onSubmit(): void {

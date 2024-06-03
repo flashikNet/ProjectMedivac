@@ -15,6 +15,9 @@ import { CreateTeamComponent } from './create-team/create-team.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PlayerComponent } from './player/player.component';
 import {JwtInterceptor} from "./_interceptors/jwt.interceptor";
+import { InvitePlayerComponent } from './invite-player/invite-player.component';
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import {JwtInterceptor} from "./_interceptors/jwt.interceptor";
     TeamComponent,
     RegisterComponent,
     CreateTeamComponent,
-    PlayerComponent
+    PlayerComponent,
+    InvitePlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,8 @@ import {JwtInterceptor} from "./_interceptors/jwt.interceptor";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

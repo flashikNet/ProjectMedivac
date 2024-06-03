@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from "../../environments/environment";
 import {Team} from "../_models/team";
+import {Roles} from "../_enums/roles";
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,5 @@ export class TeamsService {
   createTeam(name: string) {
     return this.http.post(environment.apiUrl + 'Teams/teams/createTeam', name);
   }
+
 }

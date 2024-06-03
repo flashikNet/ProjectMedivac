@@ -1,4 +1,5 @@
-﻿using Application.Models.Requests;
+﻿using System.Security.Claims;
+using Application.Models.Requests;
 using Application.Models.Responses;
 using Domain.Entities;
 using Domain.Enums;
@@ -44,11 +45,11 @@ public class UsersController : BaseApiController
             Race = request.Race,
             Role = Roles.User
         };
-        
+
         await _usersRepository.CreateUserAsync(user);
         return Ok(user);
     }
-    
+
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] AuthRequest authRequest)
     {
@@ -74,5 +75,41 @@ public class UsersController : BaseApiController
         };
 
         return Ok(response);
+    }
+
+    [HttpGet("role")]
+    public async Task<ActionResult<Roles>> GetUserRole()
+    {
+        var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (id != null)
+        {
+            var userId = new Guid(id);
+            var user = await _usersRepository.GetUserByIdAsync(userId);
+            if (user != null)
+            {
+                return Ok(user.Role);
+            }
+            return NotFound("User not found");
+        }
+
+        return BadRequest("Invalid user id");
+    }
+
+    [HttpGet("userTeamId")]
+    public async Task<ActionResult<Guid>> GetUserTeamId()
+    {
+        var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (id != null)
+        {
+            var userId = new Guid(id);
+            var user = await _usersRepository.GetUserByIdAsync(userId);
+            if (user != null)
+            {
+                return Ok(user.Team?.Id);
+            }
+
+            return NotFound("User not found");
+        }
+        return BadRequest("Invalid user id");
     }
 }

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-5">
+        <div class="card-header">
+          <h4 class="text-center">Приглашение игрока в команду</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="invitePlayerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mt-3">
+              <label for="playerUsername">Имя пользователя игрока</label>
+              <input type="text" id="playerUsername" formControlName="playerUsername" class="form-control" placeholder="Введите имя пользователя игрока...">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-2">Пригласить игрока</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

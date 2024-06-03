@@ -3,23 +3,23 @@
     <div class="col">
       <div *ngFor="let team of teams" class="card mb-3 mt-3">
         <div class="card-header">
-          <h4 class="team-name" [routerLink]="'/teams/' + team.id">{{ team.name }} <img class="icon" [src]="'https://flagicons.lipis.dev/flags/4x3/'+team.region.toLowerCase()+'.svg'" alt="{{team.region}}"></h4>
+          <h4 class="team-name" [routerLink]="'/teams/' + team.id">{{ team.teamName }} <img class="icon" [src]="'https://flagicons.lipis.dev/flags/4x3/ru.svg'" alt="RU"></h4>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-3">
-              <img class="team-logo" [routerLink]="'/teams/' + team.id" [src]="'https://cdn2.steamgriddb.com/logo_thumb/4ccea3161064506dda8e0c9fd416d1ae.png'" alt="{{team.region}}">
+              <img class="team-logo" [routerLink]="'/teams/' + team.id" [src]="'https://cdn2.steamgriddb.com/logo_thumb/4ccea3161064506dda8e0c9fd416d1ae.png'" alt="RU">
             </div>
             <div class="col-9">
               <h5>Игроки:</h5>
               <ul class="list-group">
-                <li *ngFor="let player of team.players" class="list-group-item">
+                <li *ngFor="let player of team.members" class="list-group-item">
                   <div class="row align-items-center">
                     <div class="col-1">
                       <img class="icon" [src]="'https://sc2pulse.nephest.com/sc2/static/icon/race/' + player.race.toLowerCase() + '.svg'" alt="{{player.race}}">
                     </div>
                     <div class="col-1">
-                      <img class="icon" [src]="'https://flagicons.lipis.dev/flags/4x3/'+player.country.toLowerCase()+'.svg'" alt="{{player.country}}">
+                      <img class="icon" [src]="'https://flagicons.lipis.dev/flags/4x3/ru.svg'" alt="RU">
                     </div>
                     <div class="col-3">
                       <span class="player-name fw-semibold" routerLink="/players/{{player.id}}">{{ player.nickname }}</span>
@@ -27,6 +27,7 @@
                   </div>
                 </li>
               </ul>
+              <button *ngIf="canChallenge(team)" class="btn btn-primary mt-3" (click)="challengeTeam(team)">Вызвать на дуэль</button>
             </div>
           </div>
         </div>

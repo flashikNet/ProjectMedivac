@@ -134,4 +134,12 @@ public class UsersRepository : IUsersRepository
         var result = await _mongoCollection.UpdateOneAsync(u => u.Id == userId, update);
         return result.ModifiedCount > 0;
     }
+
+
+
+    public async Task<Guid> GetUserTeam(Guid userId)
+    {
+        var user = GetUserByIdAsync(userId);
+        return user.Result.Team.Id;
+    }
 }

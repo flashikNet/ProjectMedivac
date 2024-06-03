@@ -8,6 +8,7 @@ import {TeamComponent} from "./team/team.component";
 import {RegisterComponent} from "./register/register.component";
 import {CreateTeamComponent} from "./create-team/create-team.component";
 import {PlayerComponent} from "./player/player.component";
+import {InvitePlayerComponent} from "./invite-player/invite-player.component";
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'teams/:id', component: TeamComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'create-team', component: CreateTeamComponent},
+  { path: 'invite-player', component: InvitePlayerComponent},
   { path: 'players/:id', component: PlayerComponent}
 ];
 

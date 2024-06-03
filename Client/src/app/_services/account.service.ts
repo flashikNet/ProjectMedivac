@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {User} from "../_models/user";
-import {of, ReplaySubject} from "rxjs";
+import {Observable, of, ReplaySubject} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Register} from "../_models/register";
 import {Login} from "../_models/login";
 import {Router} from "@angular/router";
+import {Roles} from "../_enums/roles";
 
 @Injectable({
   providedIn: 'root'
@@ -49,12 +50,15 @@ export class AccountService {
       })
     )
   }
+
   loadCurrentUser() {
     let user = localStorage.getItem('user');
     if (user === null) {
       this.currentUserSource.next(null);
       return of(null);
     }
+    this.getCurrentUserRole()
+    this.getCurrentUserTeamId()
     this.currentUserSource.next(JSON.parse(user));
     return JSON.parse(user);
   }
@@ -62,6 +66,18 @@ export class AccountService {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/')
+  }
+
+  getCurrentUserRole(): Observable<Roles> {
+    let result = this.http.get<Roles>(environment.apiUrl + 'Users/role');
+    console.log(result);
+    return result;
+  }
+
+  getCurrentUserTeamId(): Observable<string> {
+    let result = this.http.get<string>(environment.apiUrl + 'Users/userTeamId');
+    console.log(result);
+    return result;
   }
 
 }

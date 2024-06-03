@@ -1,4 +1,4 @@
-﻿enum Roles {
+﻿export enum Roles {
   User,
   Player,
   Captain,
